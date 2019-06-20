@@ -17,6 +17,7 @@ public class DeviceInfo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_device_info);
 
+        setTitle("Device Information");
         Button button = (Button) findViewById(R.id.getSystemInfo);
         final TextView textView = (TextView) findViewById(R.id.info_display);
 

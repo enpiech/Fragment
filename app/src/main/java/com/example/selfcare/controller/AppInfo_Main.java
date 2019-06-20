@@ -29,6 +29,7 @@ public class AppInfo_Main extends AppCompatActivity {
 
 
     private void setEvent() {
+        setTitle("App Information");
         FragmentManager manager = getSupportFragmentManager();
         FragmentAdapter adapter = new FragmentAdapter(manager);
         viewPager.setAdapter(adapter);

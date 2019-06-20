@@ -6,9 +6,8 @@
   android:id="@+id/list"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:layout_marginLeft="16dp"
-  android:layout_marginRight="16dp"
-  android:name="com.example.trainingfragment.UsageFragment"
+  android:layout_margin="@dimen/fragment_margin_16dp"
+  android:name="com.example.trainingfragment.BatteryFragment"
   app:layoutManager="LinearLayoutManager"
-  tools:context=".fragments.UsageFragment"
-  tools:listitem="@layout/fragment_usage"/>
+  tools:context=".fragments.BatteryUsageFragment"
+  tools:listitem="@layout/fragment_battery_usage_item"/>

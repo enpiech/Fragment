@@ -2,6 +2,7 @@ package com.example.trainingfragment.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,16 +10,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.example.trainingfragment.RecycleViewAdapter.MyUsageRecyclerViewAdapter;
+import com.example.trainingfragment.DAL.AppInfoDataSource;
+import com.example.trainingfragment.RecycleViewAdapter.Listener.OnListFragmentInteractionListener;
+import com.example.trainingfragment.RecycleViewAdapter.MyCpuRecyclerViewAdapter;
 import com.example.trainingfragment.R;
-import com.example.trainingfragment.dummy.DummyContent;
-import com.example.trainingfragment.dummy.DummyContent.DummyItem;
 
 /**
  * A fragment representing a list of Items. <p /> Activities containing this fragment MUST implement
  * the {@link OnListFragmentInteractionListener} interface.
  */
-public class UsageFragment extends Fragment {
+public class CpuUsageFragment extends Fragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
@@ -30,13 +31,13 @@ public class UsageFragment extends Fragment {
      * Mandatory empty constructor for the fragment manager to instantiate the fragment (e.g. upon
      * screen orientation changes).
      */
-    public UsageFragment() {
+    public CpuUsageFragment() {
     }
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static UsageFragment newInstance(int columnCount) {
-        UsageFragment fragment = new UsageFragment();
+    public static CpuUsageFragment newInstance(int columnCount) {
+        CpuUsageFragment fragment = new CpuUsageFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
@@ -53,9 +54,9 @@ public class UsageFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_usage_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_cpu_usage_list, container, false);
 
         // Set the adapter
         if (view instanceof RecyclerView) {
@@ -66,14 +67,14 @@ public class UsageFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyUsageRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+            recyclerView.setAdapter(new MyCpuRecyclerViewAdapter(AppInfoDataSource.ITEMS, mListener));
         }
         return view;
     }
 
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         if (context instanceof OnListFragmentInteractionListener) {
             mListener = (OnListFragmentInteractionListener) context;
@@ -87,19 +88,5 @@ public class UsageFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this fragment to allow an
-     * interaction in this fragment to be communicated to the activity and potentially other
-     * fragments contained in that activity.
-     * <p/>
-     * See the Android Training lesson <a href= "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnListFragmentInteractionListener {
-
-        // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
     }
 }

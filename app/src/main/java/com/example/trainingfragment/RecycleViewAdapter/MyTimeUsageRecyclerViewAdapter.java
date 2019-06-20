@@ -19,13 +19,13 @@ import java.util.List;
  * specified {@link OnListFragmentInteractionListener}. TODO: Replace the implementation with code
  * for your data type.
  */
-public class MyBatteryRecyclerViewAdapter extends
-        RecyclerView.Adapter<MyBatteryRecyclerViewAdapter.ViewHolder> {
+public class MyTimeUsageRecyclerViewAdapter extends
+        RecyclerView.Adapter<MyTimeUsageRecyclerViewAdapter.ViewHolder> {
 
     private final List<AppInfoModel> mValues;
     private final OnListFragmentInteractionListener mListener;
 
-    public MyBatteryRecyclerViewAdapter(List<AppInfoModel> items,
+    public MyTimeUsageRecyclerViewAdapter(List<AppInfoModel> items,
             OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
@@ -35,8 +35,7 @@ public class MyBatteryRecyclerViewAdapter extends
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_battery_usage_item, parent, false);
-
+                .inflate(R.layout.fragment_time_usage_item, parent, false);
         switch (viewType) {
             case 0:
                 break;
@@ -48,14 +47,15 @@ public class MyBatteryRecyclerViewAdapter extends
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final MyBatteryRecyclerViewAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final MyTimeUsageRecyclerViewAdapter.ViewHolder holder, int position) {
         final AppInfoModel appInfo = mValues.get(position);
 
         holder.mItem = appInfo;
         holder.mIconView.setImageDrawable(appInfo.getAppIcon());
         holder.mNameView.setText(appInfo.getAppName());
         holder.mPackageNameView.setText(appInfo.getAppPackageName());
-        holder.mUsagePercentView.setText(appInfo.getAverageCPUUsagePercent());
+        holder.mLastTimeUsed.setText(appInfo.getLastTimeUsage());
+        holder.mLifeTime.setText(appInfo.getLastLifeTime());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,12 +80,12 @@ public class MyBatteryRecyclerViewAdapter extends
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-
         final View mView;
         final ImageView mIconView;
         final TextView mNameView;
         final TextView mPackageNameView;
-        final TextView mUsagePercentView;
+        final TextView mLastTimeUsed;
+        final TextView mLifeTime;
         AppInfoModel mItem;
 
         ViewHolder(View view) {
@@ -94,7 +94,8 @@ public class MyBatteryRecyclerViewAdapter extends
             mIconView = (ImageView) view.findViewById(R.id.img_icon);
             mNameView = (TextView) view.findViewById(R.id.txt_name);
             mPackageNameView = (TextView) view.findViewById(R.id.txt_package_name);
-            mUsagePercentView = (TextView) view.findViewById(R.id.txt_usage_percent);
+            mLastTimeUsed = (TextView) view.findViewById(R.id.txt_last_time_used);
+            mLifeTime = (TextView) view.findViewById(R.id.txt_life_time);
         }
 
         @Override
@@ -104,7 +105,8 @@ public class MyBatteryRecyclerViewAdapter extends
                     ", mIconView=" + mIconView +
                     ", mNameView=" + mNameView +
                     ", mPackageNameView=" + mPackageNameView +
-                    ", mUsagePercentView=" + mUsagePercentView +
+                    ", mLastTimeUsed=" + mLastTimeUsed +
+                    ", mLifeTime=" + mLifeTime +
                     ", mItem=" + mItem +
                     '}';
         }

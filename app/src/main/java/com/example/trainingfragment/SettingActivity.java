@@ -1,17 +1,21 @@
 package com.example.trainingfragment;
 
 import android.content.Intent;
+import android.view.View;
+import android.widget.ProgressBar;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import com.example.trainingfragment.DAL.AppInfoDataSource;
 import com.example.trainingfragment.RecycleViewAdapter.Listener.OnItemClickListener;
 import com.example.trainingfragment.RecycleViewAdapter.MySettingRecyclerViewAdapter;
 import com.example.trainingfragment.DAL.SettingContent;
 import com.example.trainingfragment.models.SettingModel;
 
 public class SettingActivity extends AppCompatActivity implements OnItemClickListener {
-    private RecyclerView lstSetting;
+    private RecyclerView mListSettings;
+    private ProgressBar mProgressBar;
 
     private MySettingRecyclerViewAdapter adapter;
 
@@ -22,16 +26,30 @@ public class SettingActivity extends AppCompatActivity implements OnItemClickLis
         loadView();
     }
 
-    private void loadView() {
-        lstSetting = findViewById(R.id.lst_setting);
-        adapter = new MySettingRecyclerViewAdapter(SettingContent.ITEMS, this);
-        lstSetting.setLayoutManager(new LinearLayoutManager(this));
-        lstSetting.setAdapter(adapter);
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mListSettings.setVisibility(View.VISIBLE);
     }
 
+    private void loadView() {
+        mListSettings = findViewById(R.id.lst_setting);
+        adapter = new MySettingRecyclerViewAdapter(SettingContent.ITEMS, this);
+        mListSettings.setLayoutManager(new LinearLayoutManager(this));
+        mListSettings.setAdapter(adapter);
+
+        mProgressBar = findViewById(R.id.progress_circular);
+    }
+
+    private void loadData() {
+        AppInfoDataSource.getAppList(this);
+    }
 
     @Override
     public void onItemClickListener(SettingModel item) {
+        mListSettings.setVisibility(View.GONE);
+        mProgressBar.setVisibility(View.VISIBLE);
+
         Intent intent = null;
         switch (item.getName()) {
             case "Basic Information":

@@ -14,11 +14,14 @@ import java.util.List;
 import java.util.Map;
 
 public class AppInfoDataSource {
+    public static boolean isComplete = false;
+
     public static final List<AppInfoModel> ITEMS = new ArrayList<>();
 
     public static final Map<String, AppInfoModel> ITEM_MAP = new HashMap<String, AppInfoModel>();
 
     public static void getAppList(Context context) {
+        isComplete = false;
         PackageManager pm = context.getPackageManager();
         List<PackageInfo> installedPackages = pm.getInstalledPackages(0);
         for (PackageInfo packageInfo : installedPackages) {
@@ -39,6 +42,7 @@ public class AppInfoDataSource {
                 addItem(appInfo);
             }
         }
+        isComplete = true;
     }
 
     private static void addItem(AppInfoModel item) {

@@ -48,4 +48,9 @@ public abstract class BaseAdapter extends RecyclerView.Adapter<BaseAdapter.Recyc
             imgIcon.setImageDrawable(modelAppInfo.getIcon());
         }
     }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position % 2;
+    }
 }

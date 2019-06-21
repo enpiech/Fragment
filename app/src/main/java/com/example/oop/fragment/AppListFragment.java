@@ -24,6 +24,8 @@ import com.example.oop.model.AppDetailModel;
 import com.example.oop.model.ModelAppInfo;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -79,6 +81,11 @@ public class AppListFragment extends Fragment {
                     PackageInfo info = pm.getPackageInfo(aInfo.packageName, 0);
                     listApp.setVersion(info.versionName);
                     data.add(listApp);
+                    Collections.sort(data, new Comparator<AppDetailModel>() {
+                        public int compare(AppDetailModel o1, AppDetailModel o2) {
+                            return o1.getName().compareTo(o2.getName());
+                        }
+                    });
                 } catch (PackageManager.NameNotFoundException e) {
                     Log.e("ERROR", "we could not get the user's apps");
                 }

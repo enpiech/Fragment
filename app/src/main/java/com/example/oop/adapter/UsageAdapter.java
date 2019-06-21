@@ -31,6 +31,10 @@ public class UsageAdapter extends BaseAdapter{
     public RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.appinfo_usage_item_row, parent, false);
+        if(viewType != 0)
+        {
+            view.setBackgroundColor(view.getResources().getColor(R.color.colorItem));
+        }
         return new ViewHolder(view);
     }
 

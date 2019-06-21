@@ -47,10 +47,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(String name) {
                 switch (name) {
-                    case "App Infomation":
+                    case "App Infomation": {
                         progressBar.setVisibility(View.VISIBLE);
                         startActivity(new Intent(MainActivity.this, AppInfoActivity.class));
                         break;
+                    }
+                    case "Device Infomation": {
+                        progressBar.setVisibility(View.VISIBLE);
+                        startActivity(new Intent(MainActivity.this, DeviceInfoActivity.class));
+                        break;
+                    }
                     default:
                         Toast.makeText(MainActivity.this, name, Toast.LENGTH_SHORT).show();
                 }

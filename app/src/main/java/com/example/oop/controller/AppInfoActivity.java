@@ -37,7 +37,6 @@ public class AppInfoActivity extends AppCompatActivity {
         adapterFragment = new AdapterFragment(getSupportFragmentManager(), getLifecycle());
         viewPager2.setOrientation(viewPager2.ORIENTATION_HORIZONTAL);
         viewPager2.setAdapter(adapterFragment);
-        viewPager2.setPageTransformer(new MarginPageTransformer(1500));
         TabLayoutMediator tabLayoutMediator = new TabLayoutMediator(tabLayout, viewPager2, true, new TabLayoutMediator.OnConfigureTabCallback() {
             @Override
             public void onConfigureTab(@NotNull TabLayout.Tab tab, int position) {

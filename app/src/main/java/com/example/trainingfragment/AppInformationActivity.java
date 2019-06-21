@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.viewpager.widget.ViewPager;
 import com.example.trainingfragment.DAL.AppInfoDataSource;
-import com.example.trainingfragment.RecycleViewAdapter.Listener.OnRecycleClickListener;
 import com.example.trainingfragment.ViewPagerAdapter.ViewPagerAdapter;
 import com.example.trainingfragment.fragments.AppDetailFragment;
 import com.example.trainingfragment.fragments.BatteryUsageFragment;
@@ -14,8 +13,7 @@ import com.example.trainingfragment.fragments.TimeUsageFragment;
 import com.example.trainingfragment.models.AppInfoModel;
 import com.google.android.material.tabs.TabLayout;
 
-public class AppInformationActivity extends AppCompatActivity implements
-        OnRecycleClickListener<AppInfoModel> {
+public class AppInformationActivity extends AppCompatActivity{
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -50,10 +48,6 @@ public class AppInformationActivity extends AppCompatActivity implements
         viewPager.setAdapter(viewPagerAdapter);
     }
 
-    public OnRecycleClickListener<AppInfoModel> getListener() {
-        return this;
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         if (getSupportActionBar() != null) {
@@ -69,13 +63,4 @@ public class AppInformationActivity extends AppCompatActivity implements
         return true;
     }
 
-    @Override
-    public void onListFragmentInteraction(AppInfoModel item) {
-
-    }
-
-    @Override
-    public void onListFragmentInteraction(final int id) {
-
-    }
 }

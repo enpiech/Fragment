@@ -1,6 +1,9 @@
 package com.example.trainingfragment.models;
 
 import android.graphics.drawable.Drawable;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.DiffUtil.ItemCallback;
 
 public class AppInfoModel {
     private final Drawable mAppIcon;
@@ -11,6 +14,20 @@ public class AppInfoModel {
     private String mAverageBatteryUsagePercent;
     private String mLastTimeUsage;
     private String mLastLifeTime;
+
+    public static DiffUtil.ItemCallback<AppInfoModel> DIFF_CALLBACK = new ItemCallback<AppInfoModel>() {
+        @Override
+        public boolean areItemsTheSame(@NonNull final AppInfoModel oldItem,
+                @NonNull final AppInfoModel newItem) {
+            return oldItem.equals(newItem);
+        }
+
+        @Override
+        public boolean areContentsTheSame(@NonNull final AppInfoModel oldItem,
+                @NonNull final AppInfoModel newItem) {
+            return oldItem.getAppPackageName().equals(newItem.getAppPackageName());
+        }
+    };
 
     public AppInfoModel(Drawable mAppIcon, String mAppName, String mAppPackageName) {
         this.mAppIcon = mAppIcon;

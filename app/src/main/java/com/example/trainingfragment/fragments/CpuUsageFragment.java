@@ -2,6 +2,7 @@ package com.example.trainingfragment.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.view.View.OnClickListener;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -12,22 +13,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.example.trainingfragment.AppInformationActivity;
 import com.example.trainingfragment.DAL.AppInfoDataSource;
-import com.example.trainingfragment.RecycleViewAdapter.Adapter.CPUUsageAdapter;
-import com.example.trainingfragment.RecycleViewAdapter.Listener.OnRecycleClickListener;
+import com.example.trainingfragment.ListAdapter.CPUUsageAdapter;
 import com.example.trainingfragment.R;
 import com.example.trainingfragment.models.AppInfoModel;
 
-/**
- * A fragment representing a list of Items. <p /> Activities containing this fragment MUST implement
- * the {@link OnRecycleClickListener<AppInfoModel>} interface.
- */
 public class CpuUsageFragment extends Fragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
     private int mColumnCount = 1;
-    private OnRecycleClickListener<AppInfoModel> mListener;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the fragment (e.g. upon
@@ -69,30 +64,17 @@ public class CpuUsageFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-//            recyclerView.setAdapter(new MyCpuRecyclerViewAdapter(AppInfoDataSource.ITEMS, mListener));
-            CPUUsageAdapter adapter = new CPUUsageAdapter(getActivity());
-            adapter.setListener(mListener);
-            adapter.setItems(AppInfoDataSource.ITEMS);
+
+            CPUUsageAdapter adapter = new CPUUsageAdapter(new OnClickListener() {
+                @Override
+                public void onClick(final View view) {
+
+                }
+            });
+            adapter.submitList(AppInfoDataSource.ITEMS);
             recyclerView.setAdapter(adapter);
         }
         return view;
     }
 
-
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        if (context instanceof AppInformationActivity) {
-            mListener = ((AppInformationActivity) context).getListener();
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnListFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
 }

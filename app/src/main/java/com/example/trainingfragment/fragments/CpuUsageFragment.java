@@ -10,14 +10,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import com.example.trainingfragment.AppInformationActivity;
 import com.example.trainingfragment.DAL.AppInfoDataSource;
-import com.example.trainingfragment.RecycleViewAdapter.Listener.OnListFragmentInteractionListener;
-import com.example.trainingfragment.RecycleViewAdapter.MyCpuRecyclerViewAdapter;
+import com.example.trainingfragment.RecycleViewAdapter.Adapter.BaseAppDetailAdapter;
+import com.example.trainingfragment.RecycleViewAdapter.Listener.OnRecycleClickListener;
 import com.example.trainingfragment.R;
+import com.example.trainingfragment.models.AppInfoModel;
 
 /**
  * A fragment representing a list of Items. <p /> Activities containing this fragment MUST implement
- * the {@link OnListFragmentInteractionListener} interface.
+ * the {@link OnRecycleClickListener<AppInfoModel>} interface.
  */
 public class CpuUsageFragment extends Fragment {
 
@@ -25,7 +27,7 @@ public class CpuUsageFragment extends Fragment {
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
     private int mColumnCount = 1;
-    private OnListFragmentInteractionListener mListener;
+    private OnRecycleClickListener<AppInfoModel> mListener;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the fragment (e.g. upon
@@ -67,7 +69,11 @@ public class CpuUsageFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyCpuRecyclerViewAdapter(AppInfoDataSource.ITEMS, mListener));
+//            recyclerView.setAdapter(new MyCpuRecyclerViewAdapter(AppInfoDataSource.ITEMS, mListener));
+            BaseAppDetailAdapter adapter = new BaseAppDetailAdapter(getActivity(), BaseAppDetailAdapter.CPU_USAGE);
+            adapter.setListener(mListener);
+            adapter.setItems(AppInfoDataSource.ITEMS);
+            recyclerView.setAdapter(adapter);
         }
         return view;
     }
@@ -76,8 +82,8 @@ public class CpuUsageFragment extends Fragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        if (context instanceof OnListFragmentInteractionListener) {
-            mListener = (OnListFragmentInteractionListener) context;
+        if (context instanceof AppInformationActivity) {
+            mListener = ((AppInformationActivity) context).getListener();
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnListFragmentInteractionListener");

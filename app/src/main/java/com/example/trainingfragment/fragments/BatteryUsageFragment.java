@@ -2,6 +2,7 @@ package com.example.trainingfragment.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,15 +10,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import com.example.trainingfragment.AppInformationActivity;
 import com.example.trainingfragment.DAL.AppInfoDataSource;
-import com.example.trainingfragment.RecycleViewAdapter.Listener.OnListFragmentInteractionListener;
-import com.example.trainingfragment.RecycleViewAdapter.MyBatteryRecyclerViewAdapter;
+import com.example.trainingfragment.RecycleViewAdapter.Adapter.BaseAppDetailAdapter;
+import com.example.trainingfragment.RecycleViewAdapter.Listener.OnRecycleClickListener;
 import com.example.trainingfragment.R;
-import com.example.trainingfragment.dummy.DummyContent;
+import com.example.trainingfragment.models.AppInfoModel;
 
 /**
  * A fragment representing a list of Items. <p /> Activities containing this fragment MUST implement
- * the {@link OnListFragmentInteractionListener} interface.
+ * the {@link OnRecycleClickListener<AppInfoModel>} interface.
  */
 public class BatteryUsageFragment extends Fragment {
 
@@ -25,7 +27,7 @@ public class BatteryUsageFragment extends Fragment {
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
     private int mColumnCount = 1;
-    private OnListFragmentInteractionListener mListener;
+    private OnRecycleClickListener<AppInfoModel> mListener;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the fragment (e.g. upon
@@ -54,7 +56,7 @@ public class BatteryUsageFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_battery_usage_list, container, false);
 
@@ -67,17 +69,21 @@ public class BatteryUsageFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyBatteryRecyclerViewAdapter(AppInfoDataSource.ITEMS, mListener));
+//            recyclerView.setAdapter(new MyBatteryRecyclerViewAdapter(AppInfoDataSource.ITEMS, mListener));
+            BaseAppDetailAdapter adapter = new BaseAppDetailAdapter(getActivity(), BaseAppDetailAdapter.BATTERY_USAGE);
+            adapter.setListener(mListener);
+            adapter.setItems(AppInfoDataSource.ITEMS);
+            recyclerView.setAdapter(adapter);
         }
         return view;
     }
 
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        if (context instanceof OnListFragmentInteractionListener) {
-            mListener = (OnListFragmentInteractionListener) context;
+        if (context instanceof AppInformationActivity) {
+            mListener = ((AppInformationActivity) context).getListener();
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnListFragmentInteractionListener");

@@ -10,34 +10,36 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import com.example.trainingfragment.AppInformationActivity;
 import com.example.trainingfragment.DAL.AppInfoDataSource;
-import com.example.trainingfragment.RecycleViewAdapter.Listener.OnListFragmentInteractionListener;
-import com.example.trainingfragment.RecycleViewAdapter.MyAppInfoRecyclerViewAdapter;
+import com.example.trainingfragment.RecycleViewAdapter.Adapter.BaseAppDetailAdapter;
+import com.example.trainingfragment.RecycleViewAdapter.Listener.OnRecycleClickListener;
 import com.example.trainingfragment.R;
+import com.example.trainingfragment.models.AppInfoModel;
 
 /**
  * A fragment representing a list of Items. <p /> Activities containing this fragment MUST implement
- * the {@link OnListFragmentInteractionListener} interface.
+ * the {@link OnRecycleClickListener<AppInfoModel>} interface.
  */
-public class AppInfoFragment extends Fragment {
+public class AppDetailFragment extends Fragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
     private int mColumnCount = 1;
-    private OnListFragmentInteractionListener mListener;
+    private OnRecycleClickListener<AppInfoModel> mListener;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the fragment (e.g. upon
      * screen orientation changes).
      */
-    public AppInfoFragment() {
+    public AppDetailFragment() {
     }
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static AppInfoFragment newInstance(int columnCount) {
-        AppInfoFragment fragment = new AppInfoFragment();
+    public static AppDetailFragment newInstance(int columnCount) {
+        AppDetailFragment fragment = new AppDetailFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
@@ -67,17 +69,21 @@ public class AppInfoFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyAppInfoRecyclerViewAdapter(AppInfoDataSource.ITEMS, mListener));
+//            recyclerView.setAdapter(new MyAppInfoRecyclerViewAdapter(AppInfoDataSource.ITEMS, mListener));
+            BaseAppDetailAdapter adapter = new BaseAppDetailAdapter(getActivity(), BaseAppDetailAdapter.APP_DETAIL);
+            adapter.setListener(mListener);
+            adapter.setItems(AppInfoDataSource.ITEMS);
+            recyclerView.setAdapter(adapter);
         }
         return view;
     }
 
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        if (context instanceof OnListFragmentInteractionListener) {
-            mListener = (OnListFragmentInteractionListener) context;
+        if (context instanceof AppInformationActivity) {
+            mListener = ((AppInformationActivity) context).getListener();
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnListFragmentInteractionListener");

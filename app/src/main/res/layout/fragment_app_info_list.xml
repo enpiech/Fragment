@@ -9,5 +9,5 @@
   android:layout_margin="@dimen/fragment_margin_16dp"
   android:name="com.example.trainingfragment.AppFragment"
   app:layoutManager="LinearLayoutManager"
-  tools:context=".fragments.AppInfoFragment"
-  tools:listitem="@layout/fragment_app_info_item"/>
+  tools:context=".fragments.AppDetailFragment"
+  tools:listitem="@layout/fragment_app_detail_item"/>

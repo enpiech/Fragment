@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.example.trainingfragment.AppInformationActivity;
 import com.example.trainingfragment.DAL.AppInfoDataSource;
-import com.example.trainingfragment.RecycleViewAdapter.Adapter.BaseAppDetailAdapter;
+import com.example.trainingfragment.RecycleViewAdapter.Adapter.AppDetailAdapter;
 import com.example.trainingfragment.RecycleViewAdapter.Listener.OnRecycleClickListener;
 import com.example.trainingfragment.R;
 import com.example.trainingfragment.models.AppInfoModel;
@@ -70,7 +70,7 @@ public class AppDetailFragment extends Fragment {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
 //            recyclerView.setAdapter(new MyAppInfoRecyclerViewAdapter(AppInfoDataSource.ITEMS, mListener));
-            BaseAppDetailAdapter adapter = new BaseAppDetailAdapter(getActivity(), BaseAppDetailAdapter.APP_DETAIL);
+            AppDetailAdapter adapter = new AppDetailAdapter(getActivity());
             adapter.setListener(mListener);
             adapter.setItems(AppInfoDataSource.ITEMS);
             recyclerView.setAdapter(adapter);

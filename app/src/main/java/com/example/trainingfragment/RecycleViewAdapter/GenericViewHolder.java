@@ -1,4 +1,4 @@
-package com.example.trainingfragment.RecycleViewAdapter.ViewHolder;
+package com.example.trainingfragment.RecycleViewAdapter;
 
 import android.view.View;
 import androidx.annotation.NonNull;
@@ -6,9 +6,9 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.trainingfragment.RecycleViewAdapter.Listener.BaseRecycleListener;
 
-public abstract class BaseViewHolder<T, L extends BaseRecycleListener> extends RecyclerView.ViewHolder {
+public abstract class GenericViewHolder<T, L extends BaseRecycleListener> extends RecyclerView.ViewHolder {
 
-    public BaseViewHolder(@NonNull View itemView) {
+    public GenericViewHolder(@NonNull View itemView) {
         super(itemView);
     }
 

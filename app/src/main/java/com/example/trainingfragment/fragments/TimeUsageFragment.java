@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.example.trainingfragment.AppInformationActivity;
 import com.example.trainingfragment.DAL.AppInfoDataSource;
-import com.example.trainingfragment.RecycleViewAdapter.Adapter.BaseAppDetailAdapter;
+import com.example.trainingfragment.RecycleViewAdapter.Adapter.TimeUsageAdapter;
 import com.example.trainingfragment.RecycleViewAdapter.Listener.OnRecycleClickListener;
 import com.example.trainingfragment.R;
 import com.example.trainingfragment.models.AppInfoModel;
@@ -70,7 +70,7 @@ public class TimeUsageFragment extends Fragment {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
 //            recyclerView.setAdapter(new MyTimeUsageRecyclerViewAdapter(AppInfoDataSource.ITEMS, mListener));
-            BaseAppDetailAdapter adapter = new BaseAppDetailAdapter(getActivity(), BaseAppDetailAdapter.TIME_USAGE);
+            TimeUsageAdapter adapter = new TimeUsageAdapter(getActivity());
             adapter.setListener(mListener);
             adapter.setItems(AppInfoDataSource.ITEMS);
             recyclerView.setAdapter(adapter);

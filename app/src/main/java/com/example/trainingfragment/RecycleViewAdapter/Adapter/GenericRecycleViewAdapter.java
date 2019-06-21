@@ -4,16 +4,12 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.trainingfragment.R;
 import com.example.trainingfragment.RecycleViewAdapter.Listener.BaseRecycleListener;
-import com.example.trainingfragment.RecycleViewAdapter.ViewHolder.BaseViewHolder;
-import com.example.trainingfragment.models.AppInfoModel;
+import com.example.trainingfragment.RecycleViewAdapter.GenericViewHolder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,9 +20,9 @@ import java.util.List;
  *
  * @param <T>   type of objects, which will be used in the adapter's dataset
  * @param <L>   click listener {@link BaseRecycleListener}
- * @param <VH>  ViewHolder {@link BaseViewHolder}
+ * @param <VH>  ViewHolder {@link GenericViewHolder}
  */
-public abstract class GenericRecycleViewAdapter<T, L extends BaseRecycleListener, VH extends BaseViewHolder<T, L>>
+public abstract class GenericRecycleViewAdapter<T, L extends BaseRecycleListener, VH extends GenericViewHolder<T, L>>
         extends RecyclerView.Adapter<VH>{
 
     private List<T> mItems;

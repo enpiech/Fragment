@@ -1,6 +1,11 @@
 <resources>
-    <string name="app_name">Self care settings</string>
+    <string name="app_name">OOP</string>
+    <string name="title">Title</string>
+    <string name="dec">Dec</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="name">Name</string>
+    <string name="packagename">Package Name</string>
+    <string name="version">Version</string>
 </resources>
